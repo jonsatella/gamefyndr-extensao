@@ -33,11 +33,17 @@ window.addEventListener("message", (e: MessageEvent) => {
   if (msg.tipo === "importar" && typeof msg.pedido === "string" && PLATAFORMAS.includes(msg.plataforma)) {
     const pedido = msg.pedido.slice(0, 64);
     const porta = chrome.runtime.connect({ name: "importar" });
+    // Sinal de vida: o navegador desliga o segundo plano da extensão depois
+    // de ~30 s sem evento, e a leitura da biblioteca passa disso só esperando
+    // a loja responder. Cada mensagem recebida lá conta como atividade.
+    const pulso = setInterval(() => {
+      try { porta.postMessage({ tipo: "pulso" }); } catch { clearInterval(pulso); }
+    }, 10_000);
     porta.onMessage.addListener((m: Record<string, unknown>) => {
       avisarPagina({ ...m, pedido });
-      if (m.tipo !== "progresso") porta.disconnect();
+      if (m.tipo !== "progresso") { clearInterval(pulso); porta.disconnect(); }
     });
-    porta.onDisconnect.addListener(() => avisarPagina({ tipo: "fim", pedido }));
+    porta.onDisconnect.addListener(() => { clearInterval(pulso); avisarPagina({ tipo: "fim", pedido }); });
     porta.postMessage({ tipo: "comecar", plataforma: msg.plataforma });
   }
 });

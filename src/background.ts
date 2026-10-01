@@ -303,11 +303,15 @@ chrome.runtime.onConnect.addListener((porta: any) => {
     if (!PLATAFORMAS.includes(plataforma)) { enviar({ tipo: "erro", motivo: "plataforma" }); return; }
     if (emAndamento) { enviar({ tipo: "erro", motivo: "ja_em_andamento" }); return; }
     emAndamento = true;
+    // Segunda garantia contra o desligamento por ociosidade (a primeira é o
+    // pulso da ponte): chamar uma API da extensão também conta como atividade.
+    const acordado = setInterval(() => { try { chrome.runtime.getPlatformInfo(() => {}); } catch { /* nada */ } }, 20_000);
     try {
       await IMPORTAR[plataforma](enviar);
     } catch (err) {
       enviar({ tipo: "erro", motivo: err instanceof Error ? err.message.slice(0, 200) : "erro" });
     } finally {
+      clearInterval(acordado);
       await desligarCabecalhos();
       emAndamento = false;
     }

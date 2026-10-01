@@ -1,6 +1,6 @@
 {
   "name": "gamefyndr-extensao",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Extensão do GameFyndr que importa a biblioteca da Epic Games, GOG e PlayStation sem que nenhuma credencial saia do navegador.",
   "type": "module",
