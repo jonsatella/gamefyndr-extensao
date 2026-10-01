@@ -20,6 +20,10 @@ O caminho que funciona é o mesmo que o Playnite, o Heroic e o Legendary usam h�
 
 O servidor do GameFyndr nunca recebe nenhuma credencial dessas lojas.
 
+## Privacidade
+
+O que a extensão lê, o que envia ao GameFyndr e o que nunca envia está na [política de privacidade do GameFyndr, seção 2.4](https://gamefyndr.com/privacy). Em resumo: só a lista de jogos sai do seu navegador, nunca senha, token, cookie ou e-mail.
+
 ## Permissões, uma por uma
 
 | Permissão | Para quê |
