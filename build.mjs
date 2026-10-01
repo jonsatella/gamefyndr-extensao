@@ -71,7 +71,16 @@ const manifestos = {
   firefox: {
     ...base,
     background: { scripts: ["background.js"] },
-    browser_specific_settings: { gecko: { id: "extensao@gamefyndr.com", strict_min_version: "128.0" } },
+    browser_specific_settings: {
+      gecko: {
+        id: "extensao@gamefyndr.com",
+        strict_min_version: "140.0",
+        // Exigido pela Mozilla pra extensão nova desde 03/11/2025. O que sai
+        // do navegador: a conta na loja (id, nome, avatar) e o conteúdo que
+        // a extensão lê dos sites das lojas (a lista de jogos). Nada mais.
+        data_collection_permissions: { required: ["personallyIdentifyingInfo", "websiteContent"] },
+      },
+    },
   },
 };
 
