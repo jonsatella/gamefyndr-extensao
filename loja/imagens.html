@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Imagens da loja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --fundo: #0B0A0F; --card: #15171C; --azul: #42C1F0; --texto: #F4F5F7; --suave: rgba(244,245,247,.66); --linha: rgba(255,255,255,.10); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Inter, system-ui, sans-serif; background: var(--fundo); color: var(--texto); overflow: hidden; }
+  .tela { position: relative; overflow: hidden; display: flex; align-items: center;
+    background: radial-gradient(1000px 600px at 85% 10%, rgba(66,193,240,.16), transparent 60%),
+                radial-gradient(800px 500px at 0% 100%, rgba(66,193,240,.08), transparent 60%), var(--fundo); }
+  .shot { width: 1280px; height: 800px; padding: 72px 80px; gap: 64px; }
+  .tile { width: 440px; height: 280px; padding: 32px; flex-direction: column; justify-content: center; align-items: flex-start; gap: 14px; }
+  .marca { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .04em; font-size: 20px; }
+  .marca img { width: 40px; height: 40px; }
+  .marca b { color: var(--azul); }
+  h1 { font-size: 52px; line-height: 1.08; font-weight: 800; letter-spacing: -.02em; margin: 28px 0 20px; }
+  h1 em { font-style: normal; color: var(--azul); }
+  p.lead { font-size: 21px; line-height: 1.5; color: var(--suave); max-width: 520px; }
+  .esq { flex: 1.05; }
+  .dir { flex: 1; display: flex; justify-content: center; }
+  .modal { width: 470px; background: linear-gradient(180deg, #1a1d24, #13151a); border: 1px solid var(--linha); border-radius: 22px; padding: 26px; box-shadow: 0 30px 80px rgba(0,0,0,.55); }
+  .modal h2 { font-size: 21px; font-weight: 800; margin-bottom: 18px; }
+  .bloco { border: 1px solid rgba(66,193,240,.35); background: rgba(66,193,240,.07); border-radius: 16px; padding: 18px; }
+  .bloco .t { font-weight: 700; font-size: 15px; display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .bloco p { font-size: 13.5px; line-height: 1.55; color: var(--suave); }
+  .prog { margin: 14px 0 4px; font-size: 13.5px; color: #cdeefb; display: flex; align-items: center; gap: 8px; }
+  .barra { height: 6px; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; margin-bottom: 14px; }
+  .barra i { display: block; height: 100%; width: 42%; background: var(--azul); border-radius: 99px; }
+  .botoes { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn { border-radius: 10px; padding: 9px 13px; font-size: 13px; font-weight: 700; color: #fff; }
+  .nota { margin-top: 14px; font-size: 12px; color: rgba(244,245,247,.5); line-height: 1.5; }
+  .gira { width: 12px; height: 12px; border-radius: 50%; border: 2px solid rgba(205,238,251,.3); border-top-color: #cdeefb; }
+  .colunas { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .col { background: var(--card); border: 1px solid var(--linha); border-radius: 22px; padding: 36px 34px; }
+  .col h3 { font-size: 26px; font-weight: 800; margin-bottom: 18px; display: flex; gap: 10px; align-items: center; }
+  .col ul { list-style: none; display: grid; gap: 20px; }
+  .col li { font-size: 22px; color: var(--texto); display: flex; gap: 12px; align-items: flex-start; line-height: 1.35; }
+  .col li span { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; font-weight: 800; }
+  .sim span { background: rgba(52,211,153,.16); color: #6ee7b7; }
+  .nao span { background: rgba(244,63,94,.16); color: #fda4af; }
+  .rodape { position: absolute; left: 80px; bottom: 44px; font-size: 16px; color: var(--suave); }
+  .rodape b { color: var(--azul); font-weight: 600; }
+  .vertical { flex-direction: column; align-items: stretch; justify-content: center; gap: 44px; padding-bottom: 110px; }
+  .tile h1 { font-size: 30px; margin: 0; }
+  .tile p { font-size: 15px; color: var(--suave); line-height: 1.45; }
+  .lojas { display: flex; gap: 8px; }
+  .lojas span { font-size: 12px; font-weight: 700; padding: 5px 9px; border-radius: 8px; color: #fff; }
+</style>
+</head>
+<body>
+<script>
+  const q = new URLSearchParams(location.search);
+  const qual = q.get("i") || "1";
+  const en = q.get("lang") === "en";
+  const T = en ? {
+    h1: 'Bring your <em>Epic, GOG and PlayStation</em> library in one click',
+    lead: 'Install once, click Import and your games, wishlist and achievements arrive on GameFyndr. No password or code to paste.',
+    modal: 'Connect Epic Games', bt: 'Import with the GameFyndr extension',
+    bp: 'One click, nothing to paste. The extension uses the login you already have in this browser and throws away the access when it\'s done.',
+    prog: 'Reading achievements: game 5 of 12…', nota: '🔒 No password, token or cookie leaves your browser: GameFyndr only receives the list of games.',
+    h2: 'Only your game list leaves your browser',
+    sai: 'What GameFyndr receives', nunca: 'What never leaves your browser',
+    s: ['Your games, playtime and wishlist', 'Achievements and trophies', 'Your store account name and avatar'],
+    n: ['Passwords', 'Login codes, tokens and cookies', 'Email and payment data', 'Your browsing history'],
+    rod: 'Open source: <b>github.com/jonsatella/gamefyndr-extensao</b>',
+    tileH: 'Import your games', tileP: 'Epic, GOG and PlayStation into GameFyndr, without your login ever leaving the browser.',
+  } : {
+    h1: 'Traga sua biblioteca da <em>Epic, GOG e PlayStation</em> com um clique',
+    lead: 'Instale uma vez, clique em Importar e seus jogos, sua lista de desejos e suas conquistas chegam no GameFyndr. Sem senha nem código pra colar.',
+    modal: 'Conectar Epic Games', bt: 'Importar com a extensão do GameFyndr',
+    bp: 'Um clique, sem colar nada. A extensão usa o login que você já tem neste navegador e descarta o acesso no fim.',
+    prog: 'Lendo conquistas: jogo 5 de 12…', nota: '🔒 Nenhuma senha, token ou cookie sai do seu navegador: o GameFyndr recebe só a lista de jogos.',
+    h2: 'Só a sua lista de jogos sai do navegador',
+    sai: 'O que o GameFyndr recebe', nunca: 'O que nunca sai do seu navegador',
+    s: ['Seus jogos, tempo de jogo e lista de desejos', 'Conquistas e troféus', 'Nome e avatar da sua conta na loja'],
+    n: ['Senhas', 'Códigos de login, tokens e cookies', 'E-mail e dados de pagamento', 'Seu histórico de navegação'],
+    rod: 'Código aberto: <b>github.com/jonsatella/gamefyndr-extensao</b>',
+    tileH: 'Importe seus jogos', tileP: 'Epic, GOG e PlayStation no GameFyndr, sem o seu login sair do navegador.',
+  };
+  const marca = '<div class="marca"><img src="../icones/128.png" alt=""><span>GAME<b>FYNDR</b></span></div>';
+  if (qual === "1") {
+    document.body.innerHTML = `<div class="tela shot">
+      <div class="esq">${marca}<h1>${T.h1}</h1><p class="lead">${T.lead}</p></div>
+      <div class="dir"><div class="modal"><h2>${T.modal}</h2><div class="bloco">
+        <div class="t">🧩 ${T.bt}</div><p>${T.bp}</p>
+        <div class="prog"><div class="gira"></div>${T.prog}</div><div class="barra"><i></i></div>
+        <div class="botoes"><span class="btn" style="background:#313131">Epic Games</span><span class="btn" style="background:#86328A">GOG</span><span class="btn" style="background:#003791">PlayStation</span></div>
+        <div class="nota">${T.nota}</div></div></div></div></div>`;
+  } else if (qual === "2") {
+    document.body.innerHTML = `<div class="tela shot vertical">
+      <div>${marca}<h1 style="font-size:50px;margin:26px 0 0">${T.h2}</h1></div>
+      <div class="colunas">
+        <div class="col"><h3>✅ ${T.sai}</h3><ul class="sim">${T.s.map(x => `<li><span>✓</span>${x}</li>`).join("")}</ul></div>
+        <div class="col"><h3>🔒 ${T.nunca}</h3><ul class="nao">${T.n.map(x => `<li><span>✕</span>${x}</li>`).join("")}</ul></div>
+      </div><div class="rodape">${T.rod}</div></div>`;
+  } else {
+    document.body.innerHTML = `<div class="tela tile">${marca}<h1>${T.tileH}</h1><p>${T.tileP}</p>
+      <div class="lojas"><span style="background:#313131">Epic</span><span style="background:#86328A">GOG</span><span style="background:#003791">PlayStation</span></div></div>`;
+  }
+</script>
+</body>
+</html>

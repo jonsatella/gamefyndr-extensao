@@ -57,7 +57,8 @@ const base = {
   name: "GameFyndr: importar jogos",
   version: versao,
   description:
-    "Importa sua biblioteca, lista de desejos e conquistas da Epic Games, GOG e PlayStation pro GameFyndr. Nenhuma senha, token ou cookie sai do seu navegador.",
+    // Até 132 caracteres: é o limite da Chrome Web Store pro resumo.
+    "Importa jogos, lista de desejos e conquistas da Epic, GOG e PlayStation pro GameFyndr. Nada do seu login sai do navegador.",
   icons: { 16: "icones/16.png", 32: "icones/32.png", 48: "icones/48.png", 128: "icones/128.png" },
   // webRequest: só pra ler o redirecionamento do login da PlayStation (ver
   // pedirCodigoDaPsn em background.ts).
